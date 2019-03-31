@@ -27,6 +27,11 @@ public class ClienteController {
         model.addAttribute("clientes", clientes);
         return "cliente/cliente";
     }
+    @RequestMapping("/")
+    public String index(){
+        return "redirect:/listar";
+    }
+
 
 
     @RequestMapping("/novo")
