@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{cliente/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Formulário de Cliente</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <form action="#" th:action="@{/salvarCliente}" th:object="${cliente}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <div class="form-group">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" th:field="*{cpf}"  name="cpf" class="form-control" id="cpf" aria-describedby="cpf"
+                           placeholder="Digite o CPF" >
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('cpf')}"  th:errors='*{cpf}'></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" th:field="*{nome}" class="form-control" id="nome" name="nome" aria-describedby="nome"
+                           placeholder="Digite Nome Completo" >
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-6">
+
+                <div class="form-group">
+                    <label for="dataNascimento">Data Nascimento:</label>
+                    <input type="date" th:field="*{dataNascimento}"  name="dataNascimento" class="form-control" id="dataNascimento"
+                           aria-describedby="dtnascimento"
+                           placeholder="Digite a data de Nascimento">
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" th:field="*{email}"  class="form-control" id="email"
+                           aria-describedby="email" name="email"
+                           placeholder="Digite o email">
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <div class="form-group">
+                    <label for="estadocivil">Estado Civil:</label>
+                    <select id="estadocivil" th:field="*{estadoCivel}" name="estadoCivel" class="form-control" >
+                        <option disabled selected th:value="NULL">Selecione o estado civil</option>
+                        <option th:value="S">Solteiro</option>
+                        <option th:value="C">Casado</option>
+                    </select>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('estadoCivel')}" th:errors="*{estadoCivel}"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12 col-lg-12">
+                <div class="form-check form-check-inline">
+                    <input type="radio" th:field="*{sexo}" th:value="M" name="sexo" class="form-check-input" id="masculino">
+                    <label class="form-check-label" for="masculino">Masculino</label>
+
+                    <input type="radio" th:field="*{sexo}" th:value="F" name="sexo" class="form-check-input" id="feminino">
+                    <label class="form-check-label" for="feminino">Feminino</label>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <div class="form-group form-check">
+                    <input type="checkbox" th:checked="*{status}" name="status" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Ativo?</label>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-6">
+                <button type="submit" class="w-100 btn btn-primary fas fa-save">Salvar</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

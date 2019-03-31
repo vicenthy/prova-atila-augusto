@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../static/node_modules/jquery/dist/jquery.min.js" th:src="@{/node_modules/jquery/dist/jquery.min.js}"></script>
+    <link href="../static/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}" />
+    <script src="../static/node_modules/bootstrap/dist/js/bootstrap.min.js" th:src="@{/node_modules/bootstrap/dist/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<style>
+    .pre-scrollable{
+        max-height: 340px;
+        overflow-y: scroll;
+    }
+</style>
+</head>
+<body>
+<div th:insert="fragments/navbar.html ::navbar"></div>
+<div class="container-fluid">
+    <div layout:fragment="content" ></div>
+</div>
+    <div th:insert="fragments/footer.html ::footer"></div>
+</body>
+</html>

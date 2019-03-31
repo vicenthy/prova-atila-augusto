@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{cliente/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Formulário de Cliente</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <form action="#" th:action="@{/pesquisar}" method="post">
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-lg-6">
+            <div class="form-group">
+                <input th:value="${pesquisa}" name="pesquisa" type="text" class="form-control" id="pesquisa" aria-describedby="Pesquia"
+                       placeholder="Digite o termo da pesquisa">
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-lg-4">
+            <div class="form-group">
+                <select class="form-control" th:value="${parametro}" name="parametro">
+                    <option th:value="nome">Nome</option>
+                    <option th:value="cpf">Cpf</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-lg-2">
+                <input type="submit" class="btn btn-primary w-100" value="Pesquisar"></input>
+        </div>
+    </div>
+</form>
+
+
+    <button class="btn btn-danger selecionados">Excluir Selecionados</button>
+    <div class="table-responsive pre-scrollable">
+
+    <table class="table">
+        <thead class="thead" style="background-color: #007bff;">
+        <tr>
+            <th scope="col"><input type="checkbox" id="checkedAll" onclick="checkAll()"></th>
+            <th scope="col">Cpf</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Data Nascimento</th>
+            <th scope="col">Sexo</th>
+            <th scope="col">Estado Civil</th>
+            <th scope="col">Status</th>
+            <th scope="col">opções</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cliente : ${clientes}">
+            <td><input type="checkbox" class="checkBoxClass"
+                       th:onclick="'javascript:addToLote(\''+ ${cliente.id} +'\');'"></td>
+            <td th:text="${cliente.cpf}"></td>
+            <td th:text="${cliente.nome}"></td>
+            <td th:text="${cliente.email}"></td>
+            <td th:text="${ #temporals.format(cliente.dataNascimento, 'dd/MM/yyyy')}"></td>
+            <td th:text="${cliente.sexo} == 'M' ? 'Masculino':'Feminino'"></td>
+            <td th:text="${cliente.estadoCivel}"></td>
+            <td th:text="${cliente.status} ? 'Ativo': 'Inativo'"></td>
+            <td><a th:href="@{'/edit/' + ${cliente.id}}" class="idCliente btn btn-default fas fa-pen">Editar</a>
+                <a href="javascript:;" class="btn btn-default fas fa-trash"
+                   th:onclick="'javascript:ConfirmDialog('+${cliente.id}+')'">
+                    Excluir </a></td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirme" tabindex="-1" role="dialog" aria-labelledby="confirmeTitle"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmeTitle">Confirmar Exclusão</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Deseja Realmente Excluir?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+                    <button type="button" class="btn btn-success" id="sim">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/custom.js"></script>
+</div>
+</body>
+</html>
